@@ -4,7 +4,7 @@
 
 Name:           vinagre
 Version:        3.8.2
-Release:        1.2%{?dist}
+Release:        4%{?dist}
 Summary:        VNC client for GNOME
 
 Group:          Applications/System
@@ -15,6 +15,8 @@ Source0:        http://download.gnome.org/sources/vinagre/3.8/%{name}-%{version}
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=978825
 Patch0:         vinagre-3.8.2-switch-to-freerdp.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1055914
+Patch1:		vinagre-3.8.2-fix-storing-passwords.patch
 
 %if 0%{?with_spice}
 BuildRequires:  spice-gtk3-devel
@@ -63,6 +65,7 @@ Apart from the VNC protocol, vinagre supports Spice and RDP.
 %prep
 %setup -q
 %patch0 -p1 -b .freerdp
+%patch1 -p1 -b .passwords
 
 %build
 CFLAGS="%optflags -UGTK_DISABLE_DEPRECATED" %configure --enable-avahi \
@@ -134,6 +137,15 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 
 %changelog
+* Tue Jan 28 2014 David King <dking@redhat.com> - 3.8.2-4
+- Fix storing passwords in libsecret (#1055914)
+
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 3.8.2-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.8.2-2
+- Mass rebuild 2013-12-27
+
 * Wed Jul  3 2013 Marek Kasik <mkasik@redhat.com> - 3.8.2-1.2
 - Enable RDP again and switch to FreeRDP
 - Resolves: #978825

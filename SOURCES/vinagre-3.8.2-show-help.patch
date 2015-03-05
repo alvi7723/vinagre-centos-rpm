@@ -1,0 +1,82 @@
+commit 459216cd42820a6e3d11f8368e83fac8743ca368
+Author: Marek Kasik <mkasik@redhat.com>
+Date:   Thu Mar 6 13:05:58 2014 +0100
+
+    Don't close connect dialog when showing help
+    
+    Remove response id for the help button in the connect dialog
+    and connect to its "clicked" signal. Open help on triggering
+    of the signal.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=725816
+
+diff --git a/data/vinagre.ui b/data/vinagre.ui
+index 6749c1e..3c3c191 100644
+--- a/data/vinagre.ui
++++ b/data/vinagre.ui
+@@ -1126,7 +1126,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
+       </object>
+     </child>
+     <action-widgets>
+-      <action-widget response="-11">connect_help</action-widget>
+       <action-widget response="-6">button1</action-widget>
+       <action-widget response="-5">connect_button</action-widget>
+     </action-widgets>
+diff --git a/vinagre/vinagre-connect.c b/vinagre/vinagre-connect.c
+index c23def6..f881f94 100644
+--- a/vinagre/vinagre-connect.c
++++ b/vinagre/vinagre-connect.c
+@@ -49,6 +49,7 @@ typedef struct {
+   GtkWidget *fullscreen_check;
+   GtkWidget *plugin_box;
+   GtkWidget *connect_button;
++  GtkWidget *help_button;
+ } VinagreConnectDialog;
+ 
+ enum {
+@@ -319,6 +320,13 @@ save_history (GtkWidget *combo) {
+   }
+ }
+ 
++static void
++vinagre_connect_help_button_cb (GtkButton            *button,
++				VinagreConnectDialog *dialog)
++{
++  vinagre_utils_show_help (GTK_WINDOW(dialog->dialog), "connect");
++}
++
+ #ifdef VINAGRE_HAVE_AVAHI
+ static void
+ vinagre_connect_find_button_cb (GtkButton            *button,
+@@ -420,12 +428,18 @@ vinagre_connect (VinagreWindow *window)
+   dialog.fullscreen_check = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "fullscreen_check"));
+   dialog.plugin_box = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "plugin_options_connect_vbox"));
+   dialog.connect_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "connect_button"));
++  dialog.help_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "connect_help"));
+ 
+   setup_protocol (&dialog);
+   setup_combo (&dialog);
+   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check),
+ 				vinagre_cache_prefs_get_boolean ("connection", "fullscreen", FALSE));
+ 
++  g_signal_connect (dialog.help_button,
++		    "clicked",
++		    G_CALLBACK (vinagre_connect_help_button_cb),
++		    &dialog);
++
+ #ifdef VINAGRE_HAVE_AVAHI
+   g_signal_connect (dialog.find_button,
+ 		    "clicked",
+@@ -439,11 +453,7 @@ vinagre_connect (VinagreWindow *window)
+   gtk_widget_show_all (dialog.dialog);
+   result = gtk_dialog_run (GTK_DIALOG (dialog.dialog));
+ 
+-  if (result == GTK_RESPONSE_HELP)
+-    {
+-      vinagre_utils_show_help (GTK_WINDOW (window), "connect");
+-    }
+-  else if (result == GTK_RESPONSE_OK)
++  if (result == GTK_RESPONSE_OK)
+     {
+       gchar *host = NULL, *error_msg = NULL, *protocol = NULL, *actual_host;
+       gint port;

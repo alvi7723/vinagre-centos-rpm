@@ -1,0 +1,1987 @@
+--- a/data/vinagre.ui
++++ b/data/vinagre.ui
+@@ -845,6 +845,311 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;<
+       <action-widget response="-5">save_button</action-widget>
+     </action-widgets>
+   </object>
++  <object class="GtkMessageDialog" id="certificate_changed_dialog">
++    <property name="can_focus">False</property>
++    <property name="resizable">False</property>
++    <property name="modal">True</property>
++    <property name="destroy_with_parent">True</property>
++    <property name="type_hint">dialog</property>
++    <property name="message_type">warning</property>
++    <property name="buttons">yes-no</property>
++    <property name="text" translatable="yes">Certificate Verification</property>
++    <property name="secondary_text" translatable="yes">The remote host has changed its certificate.
++Do you trust the new certificate?</property>
++    <child internal-child="vbox">
++      <object class="GtkBox" id="messagedialog-vbox1">
++        <property name="can_focus">False</property>
++        <property name="orientation">vertical</property>
++        <property name="spacing">10</property>
++        <child internal-child="action_area">
++          <object class="GtkButtonBox" id="messagedialog-action_area1">
++            <property name="can_focus">False</property>
++            <property name="layout_style">end</property>
++          </object>
++          <packing>
++            <property name="expand">False</property>
++            <property name="fill">True</property>
++            <property name="pack_type">end</property>
++            <property name="position">0</property>
++          </packing>
++        </child>
++        <child>
++          <object class="GtkGrid" id="grid4">
++            <property name="visible">True</property>
++            <property name="can_focus">False</property>
++            <property name="row_spacing">15</property>
++            <property name="column_spacing">10</property>
++            <child>
++              <object class="GtkLabel" id="label12">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Subject of the certificate.">Subject:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">0</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="label16">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Issuer of the certificate.">Issuer:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">1</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_new_fingerprint_label">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Fingerprint of the new certificate.">New fingerprint:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">2</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_subject">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">subject</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">0</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_issuer">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">issuer</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">1</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_new_fingerprint">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">2</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_old_fingerprint_label">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Fingerprint of the old certificate.">Old fingerprint:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">3</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_changed_old_fingerprint">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">3</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++          </object>
++          <packing>
++            <property name="expand">False</property>
++            <property name="fill">True</property>
++            <property name="position">2</property>
++          </packing>
++        </child>
++      </object>
++    </child>
++  </object>
++  <object class="GtkMessageDialog" id="certificate_dialog">
++    <property name="can_focus">False</property>
++    <property name="resizable">False</property>
++    <property name="modal">True</property>
++    <property name="destroy_with_parent">True</property>
++    <property name="type_hint">dialog</property>
++    <property name="message_type">question</property>
++    <property name="buttons">yes-no</property>
++    <property name="text" translatable="yes">Certificate Verification</property>
++    <property name="secondary_text" translatable="yes">The below certificate could not be verified.
++Do you trust the certificate?</property>
++    <child internal-child="vbox">
++      <object class="GtkBox" id="messagedialog-vbox">
++        <property name="can_focus">False</property>
++        <property name="orientation">vertical</property>
++        <property name="spacing">10</property>
++        <child internal-child="action_area">
++          <object class="GtkButtonBox" id="messagedialog-action_area">
++            <property name="can_focus">False</property>
++            <property name="layout_style">end</property>
++          </object>
++          <packing>
++            <property name="expand">False</property>
++            <property name="fill">True</property>
++            <property name="pack_type">end</property>
++            <property name="position">0</property>
++          </packing>
++        </child>
++        <child>
++          <object class="GtkGrid" id="grid6">
++            <property name="visible">True</property>
++            <property name="can_focus">False</property>
++            <property name="row_spacing">15</property>
++            <property name="column_spacing">10</property>
++            <child>
++              <object class="GtkLabel" id="label24">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Subject of the certificate.">Subject:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">0</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="label27">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Issuer of the certificate.">Issuer:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">1</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="label28">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="vexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="xpad">12</property>
++                <property name="label" translatable="yes" comments="Fingerprint of the certificate.">Fingerprint:</property>
++              </object>
++              <packing>
++                <property name="left_attach">0</property>
++                <property name="top_attach">2</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_subject">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">subject</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">0</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_issuer">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">issuer</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">1</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++            <child>
++              <object class="GtkLabel" id="certificate_fingerprint">
++                <property name="visible">True</property>
++                <property name="can_focus">False</property>
++                <property name="hexpand">True</property>
++                <property name="xalign">0</property>
++                <property name="label">00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00</property>
++              </object>
++              <packing>
++                <property name="left_attach">1</property>
++                <property name="top_attach">2</property>
++                <property name="width">1</property>
++                <property name="height">1</property>
++              </packing>
++            </child>
++          </object>
++          <packing>
++            <property name="expand">False</property>
++            <property name="fill">True</property>
++            <property name="position">2</property>
++          </packing>
++        </child>
++      </object>
++    </child>
++  </object>
+   <object class="GtkDialog" id="connect_dialog">
+     <property name="can_focus">False</property>
+     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+--- a/plugins/rdp/vinagre-rdp-tab.c
++++ b/plugins/rdp/vinagre-rdp-tab.c
+@@ -730,6 +730,93 @@ frdp_authenticate (freerdp  *instance,
+     }
+ }
+ 
++static BOOL
++frdp_certificate_verify (freerdp *instance,
++                         char    *subject,
++                         char    *issuer,
++                         char    *fingerprint)
++{
++  VinagreTab *tab = VINAGRE_TAB (((frdpContext *) instance->context)->rdp_tab);
++  GtkBuilder *builder;
++  GtkWidget  *dialog;
++  GtkWidget  *widget;
++  gint        response;
++
++  builder = vinagre_utils_get_builder ();
++
++  dialog = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_dialog"));
++  gtk_window_set_transient_for ((GtkWindow *) dialog, GTK_WINDOW (vinagre_tab_get_window (tab)));
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_subject"));
++  gtk_label_set_text (GTK_LABEL (widget), subject);
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_issuer"));
++  gtk_label_set_text (GTK_LABEL (widget), issuer);
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_fingerprint"));
++  gtk_label_set_text (GTK_LABEL (widget), fingerprint);
++
++
++  response = gtk_dialog_run (GTK_DIALOG (dialog));
++  gtk_widget_hide (dialog);
++
++
++  return response == GTK_RESPONSE_YES;
++}
++
++
++#if HAVE_FREERDP_1_1
++static BOOL
++frdp_changed_certificate_verify (freerdp *instance,
++                                 char    *subject,
++                                 char    *issuer,
++                                 char    *new_fingerprint,
++                                 char    *old_fingerprint)
++{
++  VinagreTab *tab = VINAGRE_TAB (((frdpContext *) instance->context)->rdp_tab);
++  GtkBuilder *builder;
++  GtkWidget  *dialog;
++  GtkWidget  *widget;
++  GtkWidget  *label;
++  gint        response;
++
++  builder = vinagre_utils_get_builder ();
++
++  dialog = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_dialog"));
++  gtk_window_set_transient_for ((GtkWindow *) dialog, GTK_WINDOW (vinagre_tab_get_window (tab)));
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_subject"));
++  gtk_label_set_text (GTK_LABEL (widget), subject);
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_issuer"));
++  gtk_label_set_text (GTK_LABEL (widget), issuer);
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_new_fingerprint"));
++  gtk_label_set_text (GTK_LABEL (widget), new_fingerprint);
++
++  widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_old_fingerprint"));
++  label = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_changed_old_fingerprint_label"));
++  if (old_fingerprint != NULL && old_fingerprint[0] != '\0')
++    {
++      gtk_label_set_text (GTK_LABEL (widget), old_fingerprint);
++      gtk_widget_show (widget);
++      gtk_widget_show (label);
++    }
++  else
++    {
++      gtk_widget_hide (widget);
++      gtk_widget_hide (label);
++    }
++
++
++  response = gtk_dialog_run (GTK_DIALOG (dialog));
++  gtk_widget_hide (dialog);
++
++
++  return response == GTK_RESPONSE_YES;
++}
++#endif
++
+ static void
+ open_freerdp (VinagreRdpTab *rdp_tab)
+ {
+@@ -759,6 +846,10 @@ open_freerdp (VinagreRdpTab *rdp_tab)
+   priv->freerdp_session->PreConnect = frdp_pre_connect;
+   priv->freerdp_session->PostConnect = frdp_post_connect;
+   priv->freerdp_session->Authenticate = frdp_authenticate;
++  priv->freerdp_session->VerifyCertificate = frdp_certificate_verify;
++#if HAVE_FREERDP_1_1
++  priv->freerdp_session->VerifyChangedCertificate = frdp_changed_certificate_verify;
++#endif
+ 
+ #if HAVE_FREERDP_1_1
+   priv->freerdp_session->ContextSize = sizeof (frdpContext);
+--- a/po/as.po
++++ b/po/as.po
+@@ -174,6 +129,51 @@ msgstr "পৰিচয় প্ৰমা�
+ msgid "Parent Folder"
+ msgstr "উপধায়ক ফোল্ডাৰ"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "প্ৰমাণপত্ৰ সত্যাপন"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"দূৰৱৰ্তী হস্টে তাৰ প্ৰমাণপত্ৰ পৰিবৰ্তন কৰিছে।\n"
++"আপুনি নতুন প্ৰমাণপত্ৰক ভৰষা কৰে নে?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "বিষয়:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "প্ৰেৰক:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "নতুন ফিংগাৰপ্ৰিন্ট:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "পুৰনি ফিংগাৰপ্ৰিন্ট:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"তলত দিয়া প্ৰমাণপত্ৰক সত্যাপন কৰিব পৰা নগল।\n"
++"আপুনি প্ৰমাণপত্ৰক ভৰষা কৰে নে?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "ফিংগাৰপ্ৰিন্ট:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "সংযোগ কৰক"
+--- a/po/ca.po
++++ b/po/ca.po
+@@ -180,6 +150,51 @@ msgstr "_Contrasenya:"
+ msgid "Parent Folder"
+ msgstr "Carpeta pare"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verificació del certificat"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"El servidor remot ha canviat el seu certificat.\n"
++"Confieu en el certificat nou?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Assumpte:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emissor:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Empremta nova:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Empremta vella:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"No s'ha pogut verificar el certificat de sota.\n"
++"Confieu en el certificat?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Empremta:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Connecta"
+--- a/po/ca@valencia.po
++++ b/po/ca@valencia.po
+@@ -179,6 +149,51 @@ msgstr "_Contrasenya:"
+ msgid "Parent Folder"
+ msgstr "Carpeta pare"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verificació del certificat"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"El servidor remot ha canviat el seu certificat.\n"
++"Confieu en el certificat nou?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Assumpte:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emissor:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Empremta nova:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Empremta vella:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"No s'ha pogut verificar el certificat de sota.\n"
++"Confieu en el certificat?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Empremta:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Connecta"
+--- a/po/cs.po
++++ b/po/cs.po
+@@ -184,6 +132,51 @@ msgstr "_Ověřit"
+ msgid "Parent Folder"
+ msgstr "Rodičovská složka"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Ověření certifikátu"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"U vzdáleného hostitele se změnil jeho certifikát.\n"
++"Chcete novému certifikátu důvěřovat?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Subjekt:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Vydavatel:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Otisk nového:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Otisk starého:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Následující certifikát nemůže být ověřen.\n"
++"Budete certifikátu důvěřovat?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Otisk:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Připojit"
+--- a/po/de.po
++++ b/po/de.po
+@@ -196,6 +161,51 @@ msgid "_Password:"
+ msgid "Parent Folder"
+ msgstr "Eltern-Ordner"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Zertifikat-Überprüfung"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Das Zertifikat des entfernten Rechners hat sich geändert.\n"
++"Vertrauen Sie dem neuen Zertifikat?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Betreff:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Aussteller:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Neuer Fingerabdruck:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Alter Fingerabdruck:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Das unten angegebene Zertifikat konnte nicht verifiziert werden.\n"
++"Vertrauen Sie dem Zertifikat?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Fingerabdruck:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Verbinden"
+--- a/po/el.po
++++ b/po/el.po
+@@ -203,6 +156,51 @@ msgstr "_Πιστοποίηση"
+ msgid "Parent Folder"
+ msgstr "Γονικός φάκελος"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Επαλήθευση πιστοποιητικού"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Έχει αλλάξει το πιστοποιητικό του απομακρυσμένου υπολογιστή.\n"
++"Εμπιστεύεστε το νέο πιστοποιητικό;"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Θέμα:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Εκδότης:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Νέο αποτύπωμα:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Παλιό αποτύπωμα:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Δεν μπορεί να επαληθευτεί το παρακάτω πιστοποιητικό.\n"
++"Εμπιστεύεστε το νέο πιστοποιητικό;"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Αποτύπωμα:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Σύνδεση"
+--- a/po/es.po
++++ b/po/es.po
+@@ -188,6 +153,51 @@ msgstr "_Contraseña:"
+ msgid "Parent Folder"
+ msgstr "Carpeta padre"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verificación del certificado"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"El equipo remoto ha cambiado su certificado.\n"
++"¿Confía en el certificado nuevo?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Asunto:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emisor:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Huella dactilar nueva:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Huella dactilar antigua:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"No se pudo verificar el siguiente certificado.\n"
++"¿Confía en él?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Huella dactilar:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Conectar"
+--- a/po/eu.po
++++ b/po/eu.po
+@@ -183,6 +153,51 @@ msgstr "_Pasahitza:"
+ msgid "Parent Folder"
+ msgstr "Karpeta gurasoa"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Ziurtagiriaren egiaztapena"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Urruneko ostalariak bere ziurtagiria aldatu du.\n"
++"Ziurtagiri berriaz fidatzen zara?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Gaia:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Jaulkitzailea:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Hatz-marka berria:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Hatz-marka zaharra:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Ezin izan da azpiko ziurtagiria egiaztatu.\n"
++"Ziurtagiriaz fidatzen zara?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Hatz-marka:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Konektatu"
+--- a/po/fi.po
++++ b/po/fi.po
+@@ -191,6 +161,51 @@ msgstr "_Salasana:"
+ msgid "Parent Folder"
+ msgstr "Yläkansio"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Varmenteen vahvistaminen"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Etäpää on vaihtanut varmenteensa.\n"
++"Luotatko uuteen varmenteeseen?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Aihe:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Myöntäjä:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Uusi sormenjälki:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Vanha sormenjälki:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Alla olevaa varmennetta ei voitu vahvistaa.\n"
++"Luotatko varmenteeseen?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Sormenjälki:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Yhdistä"
+--- a/po/fr.po
++++ b/po/fr.po
+@@ -192,6 +160,51 @@ msgstr "_Mot de passe :"
+ msgid "Parent Folder"
+ msgstr "Dossier parent"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verification de certificat"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"L'hôte distant a modifié son certificat.\n"
++"Faites-vous confiance au nouveau certificat ?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Sujet :"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Émetteur :"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nouvelle empreinte :"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Ancienne empreinte :"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Le certificat ci-dessous n'a pas pu être vérifié.\n"
++"Faites-vous confiance à ce certificat ?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Empreinte :"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Se connecter"
+--- a/po/gl.po
++++ b/po/gl.po
+@@ -204,6 +165,51 @@ msgstr "_Contrasinal:"
+ msgid "Parent Folder"
+ msgstr "Cartafol pai"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verificación de certificado"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"O equipo remoto cambiou o seu certificado.\n"
++"Confía no novo certificado?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Asunto:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emisor:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nova impresión dixital:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Impresión dixital antiga:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"O certificado de embaixo non puido verificarse.\n"
++"Confía no certificado?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Impresión dixital:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Conectar"
+--- a/po/gu.po
++++ b/po/gu.po
+@@ -173,6 +128,51 @@ msgstr "પાસવર્ડ (_P):"
+ msgid "Parent Folder"
+ msgstr "મુખ્ય ફોલ્ડર"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "પ્રમાણપત્ર ચકાસણી"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"દૂરસ્થ યજમાન તેનાં પ્રમાણપત્રને બદલે છે.\n"
++"શું તમને નવાં પ્રમાણપત્ર પર વિશ્ર્વાસ છે?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "વિષય:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "અદા કરનાર:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "નવી આંગળીછાપન:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "જૂની આંગળીછાપન:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"નીચેનાં પ્રમાણપત્રને ચકાસી શક્યા નહિં.\n"
++"શું તમને પ્રમાણપત્ર પર વિશ્ર્વાસ છે?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "આંગળીની છાપ:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "જોડાવો"
+--- a/po/he.po
++++ b/po/he.po
+@@ -166,6 +149,51 @@ msgstr "_ססמה:"
+ msgid "Parent Folder"
+ msgstr "תיקיית ההורה"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "אימות אישור"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"המארח המרוחק שינה את האישור שלו.\n"
++"האם ברצונך לבטוח באישור החדש?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "נושא:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "מנפיק:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "טביעת אצבע חדשה:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "טביעת אצבע ישנה"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"האישור שלהלן לא ניתן לאימות.\n"
++"האם ברצונך לבטוח באישור?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "טביעת אצבע:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "התחברות"
+--- a/po/hu.po
++++ b/po/hu.po
+@@ -181,6 +146,51 @@ msgid "_Password:"
+ msgid "Parent Folder"
+ msgstr "Szülőmappa"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Tanúsítvány ellenőrzés"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"A távoli gép megváltoztatta a tanúsítványát.\n"
++"Megbízik az új tanúsítványban?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Tárgy:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Kibocsátó:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Új ujjlenyomat:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Régi ujjlenyomat:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"A lenti tanúsítványt nem sikerült ellenőrizni.\n"
++"Megbízik a tanúsítványban?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Ujjlenyomat:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Kapcsolódás"
+--- a/po/id.po
++++ b/po/id.po
+@@ -180,6 +147,51 @@ msgstr "_Sandi:"
+ msgid "Parent Folder"
+ msgstr "Folder Induk"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verifikasi Sertifikat"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Host jauh telah mengubah sertifikatnya.\n"
++"Apakah Anda mempercayai sertifikat baru?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Subjek:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Penerbit:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Sidik jari baru:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Sidik jari lama:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Sertifikat di bawah tak dapat diverifikasi.\n"
++"Apakah Anda mempercayai sertifikat ini?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Sidik jari:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Sambung"
+--- a/po/it.po
++++ b/po/it.po
+@@ -186,6 +156,51 @@ msgstr "_Password:"
+ msgid "Parent Folder"
+ msgstr "Cartella superiore"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verifica del certificato"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"L'host remoto ha cambiato il certificato.\n"
++"Considerare attendibile il nuovo certificato?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Soggetto:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emittente:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nuova impronta digitale:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Vecchia impronta digitale:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Il seguente certificato non può essere verificato.\n"
++"Considerarlo attendibile comunque?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Impronta digitale:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Connetti"
+--- a/po/ko.po
++++ b/po/ko.po
+@@ -181,6 +149,51 @@ msgstr "암호(_P):"
+ msgid "Parent Folder"
+ msgstr "상위 폴더"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "인증서 확인"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"원격 호스트가 인증서를 바꿨습니다.\n"
++"새 인증서를 신뢰하시겠습니까?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "제목:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "발급자:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "새 핑거프린트:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "과거 핑거프린트:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"아래 인증서를 확인할 수 없습니다.\n"
++"그래도 인증서를 신뢰하시겠습니까?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "핑거프린트:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "연결"
+--- a/po/lt.po
++++ b/po/lt.po
+@@ -165,6 +152,51 @@ msgstr "_Slaptažodis:"
+ msgid "Parent Folder"
+ msgstr "Aukštesnysis aplankas"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Liudijimo tikrinimas"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Nutolęs kompiuteris pakeitė savo liudijimą.\n"
++"Ar pasitikite naujuoju liudijimu?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Subjektas:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Išdavė:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Naujas piršto atspaudas:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Senas piršto atspaudas:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Žemiau esančio liudijimo negalima patikrinti.\n"
++"Ar pasitikite liudijimu?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Piršo atspaudas:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Prisijungti"
+--- a/po/mr.po
++++ b/po/mr.po
+@@ -183,6 +131,51 @@ msgstr "ओळख पटवा (_A)"
+ msgid "Parent Folder"
+ msgstr "मुख्य फोल्डर"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "प्रमाणपत्र तपासणी"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"दूरस्त यजमानने स्वतःचे प्रमाणपत्र बदलले.\n"
++"नवीन प्रमाणपत्र स्वीकार्य आहे?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "विषय:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "इस्युअर:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "नवीन फिंगरप्रिंट:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "जुणी फिंगरप्रिंट:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"खालील प्रमाणपत्राची तपासणी अशक्य.\n"
++"प्रमाणपत्र विश्वासर्ह आहे?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "फिंगरप्रिंट:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "जोडणी करा"
+--- a/po/nb.po
++++ b/po/nb.po
+@@ -167,6 +132,51 @@ msgstr "_Passord:"
+ msgid "Parent Folder"
+ msgstr "Opphavsmappe"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verifisering av sertifikat"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Ekstern vert har endret sitt sertifikat.\n"
++"Stoler du på det nye sertifikatet?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Emne:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Utsteder:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nytt fingeravtrykk:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Gammelt fingeravtrykk:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Sertifikatet under kunne ikke verifiseres.\n"
++"Stoler du på sertifikatet?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Fingeravtrykk:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Koble til"
+--- a/po/or.po
++++ b/po/or.po
+@@ -194,6 +138,51 @@ msgstr "ବୈଧିକରଣ କରନ୍ତୁ (_A)"
+ msgid "Parent Folder"
+ msgstr "ମୁଖ୍ୟ ଫୋଲଡର"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "ପ୍ରମାଣପତ୍ର ଯାଞ୍ଚ"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"ସୁଦୂର ହୋଷ୍ଟ ତାହାର ପ୍ରମାଣପତ୍ର ପରିବର୍ତ୍ତନ କରିଛି।\n"
++"ଆପଣ ନୂତନ ପ୍ରମାଣପତ୍ରକୁ ବିଶ୍ୱାସ କରନ୍ତି କି?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "ବିଷୟ:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "ପ୍ରଦାନକାରୀ:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "ନୂତନ ଅଙ୍ଗୁଳି ଚିହ୍ନ:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "ପୁରୁଣା ଅଙ୍ଗୁଳି ଚିହ୍ନ:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"ନିମ୍ନରେ ଥିବା ପ୍ରମାଣପତ୍ରକୁ ଯାଞ୍ଚ କରାଯାଇପାରିଲା ନାହିଁ।\n"
++"ଆପଣ ସେହି ପ୍ରମାଣପତ୍ରକୁ ବିଶ୍ୱାସ କରନ୍ତି କି?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "ଅଙ୍ଗୁଳି ଚିହ୍ନ:"
++
+ #: ../data/vinagre.ui.h:22
+ #| msgid "Connection"
+ msgid "Connect"
+--- a/po/pa.po
++++ b/po/pa.po
+@@ -182,6 +150,51 @@ msgstr "ਪਾਸਵਰਡ(_P):."
+ msgid "Parent Folder"
+ msgstr "ਮੁੱਢਲਾ ਫੋਲਡਰ"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "ਸਰਟੀਫਿਕੇਟ ਪੜਤਾਲ"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"ਰਿਮੋਟ ਹੋਸਟ ਨੇ ਇਹ ਸਰਟੀਫਿਕੇਟ ਬਦਲਿਆ ਹੈ।\n"
++"ਕੀ ਤੁਸੀਂ ਨਵੇਂ ਸਰਟੀਫਿਕੇਟ ਉੱਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹੋ?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "ਵਿਸ਼ਾ:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "ਜਾਰੀ-ਕਰਤਾ:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "ਨਵਾਂ ਫਿੰਗਰ-ਪਰਿੰਟ:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "ਪੁਰਾਣਾ ਫਿੰਗਰ-ਪਰਿੰਟ:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"ਹੇਠ ਦਿੱਤੇ ਸਰਟੀਫਿਕੇਟ ਦੀ ਪੜਤਾਲ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ।\n"
++"ਕੀ ਤੁਸੀਂ ਸਰਟੀਫਿਕੇਟ ਉੱਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹੋ?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "ਫਿੰਗਰ-ਪਰਿੰਟ:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "ਕੁਨੈਕਟ ਕਰੋ"
+--- a/po/pt_BR.po
++++ b/po/pt_BR.po
+@@ -189,6 +158,51 @@ msgstr "_Senha:"
+ msgid "Parent Folder"
+ msgstr "Pasta pai"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Verificação de certificado"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"A máquina remota mudou seu certificado.\n"
++"Você confia no novo certificado?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Sujeito:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Emissor:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nova impressão digital:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Impressão digital antiga:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"O certificado abaixo não pôde ser verificado.\n"
++"Você confia no certificado?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Impressão digital:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Conectar"
+--- a/po/ru.po
++++ b/po/ru.po
+@@ -184,6 +154,51 @@ msgstr "_Пароль:"
+ msgid "Parent Folder"
+ msgstr "Родительская папка"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Подтверждение сертификата"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Сертификат удалённого узла изменился.\n"
++"Вы доверяете новому сертификату?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Тема:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Эмитент:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Новый отпечаток:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Старый отпечаток:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Не удалось проверить сертификат.\n"
++"Вы доверяете этому сертификату?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Отпечаток:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Подключиться"
+--- a/po/sk.po
++++ b/po/sk.po
+@@ -175,6 +144,51 @@ msgid "_Password:"
+ msgid "Parent Folder"
+ msgstr "Rodičovský priečinok"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Overenie certifikátu"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Vzdialený hostiteľ zmenil svoj certifikát.\n"
++"Dôverujete novému certifikátu?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Predmet:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Vydavateľ:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nový odtlačok:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Starý odtlačok:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Nasledovný certifikát sa nepodarilo overiť.\n"
++"Dôverujete certifikátu?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Odtlačok:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Pripojiť"
+--- a/po/sv.po
++++ b/po/sv.po
+@@ -162,6 +150,51 @@ msgstr "_Lösenord:"
+ msgid "Parent Folder"
+ msgstr "Föräldramapp"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "Certifikatverifiering"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"Fjärrvärden har ändrat sitt certifikat.\n"
++"Litar du på det nya certifikatet?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "Ämne:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "Utfärdare:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "Nytt fingeravtryck:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "Gammalt fingeravtryck:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"Nedanstående certifikat kunde inte verifieras.\n"
++"Litar du på certifikatet?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "Fingeravtryck:"
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "Anslut"
+--- a/po/ta.po
++++ b/po/ta.po
+@@ -110,6 +136,51 @@ msgstr "密碼(_P):"
+ msgid "Parent Folder"
+ msgstr "பெற்றோர் கோப்புறை>"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "சான்றிதழ் செல்லுபடியாக்கம்"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"தொலைநிலை வழங்கி தனது சான்றிதழை மாற்றிவிட்டது.\n"
++"புதிய சான்றிதழை நம்புகிறீர்களா?"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "பொருள்:"
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "வழங்குநர்:"
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "புதிய கைரேகை:"
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "பழைய கைரேகை:"
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"கீழுள்ள சான்றிதழைச் சரிபார்க்க முடியவில்லை\n"
++"சான்றிதழை நம்புகிறீர்களா?"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "கைரேகை:"
++
+ #: ../data/vinagre.ui.h:15
+ msgid "Reverse Connections"
+ msgstr "இணைப்புகளை திருப்புக"
+--- a/po/zh_HK.po
++++ b/po/zh_HK.po
+@@ -169,6 +136,51 @@ msgstr "密碼(_P):"
+ msgid "Parent Folder"
+ msgstr "上層資料夾"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "證書驗證"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"遠端主機已改變它的證書。\n"
++"你信任這個新證書嗎？"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "主旨："
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "簽發者："
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "新的數碼指紋："
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "舊的數碼指紋："
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"下列證書無法被驗證。\n"
++"你信任這個證書嗎？"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "數碼指紋："
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "連線"
+--- a/po/zh_TW.po
++++ b/po/zh_TW.po
+@@ -175,6 +142,51 @@ msgstr "密碼(_P):"
+ msgid "Parent Folder"
+ msgstr "上層資料夾"
+ 
++#: ../data/vinagre.ui.h:23
++msgid "Certificate Verification"
++msgstr "憑證驗證"
++
++#: ../data/vinagre.ui.h:24
++msgid ""
++"The remote host has changed its certificate.\n"
++"Do you trust the new certificate?"
++msgstr ""
++"遠端主機已改變它的憑證。\n"
++"您信任這個新憑證嗎？"
++
++#. Subject of the certificate.
++#: ../data/vinagre.ui.h:27
++msgid "Subject:"
++msgstr "主旨："
++
++#. Issuer of the certificate.
++#: ../data/vinagre.ui.h:29
++msgid "Issuer:"
++msgstr "簽發者："
++
++#. Fingerprint of the new certificate.
++#: ../data/vinagre.ui.h:31
++msgid "New fingerprint:"
++msgstr "新的數位指紋："
++
++#. Fingerprint of the old certificate.
++#: ../data/vinagre.ui.h:33
++msgid "Old fingerprint:"
++msgstr "舊的數位指紋："
++
++#: ../data/vinagre.ui.h:34
++msgid ""
++"The below certificate could not be verified.\n"
++"Do you trust the certificate?"
++msgstr ""
++"下列憑證無法被驗證。\n"
++"您信任這個憑證嗎？"
++
++#. Fingerprint of the certificate.
++#: ../data/vinagre.ui.h:37
++msgid "Fingerprint:"
++msgstr "數位指紋："
++
+ #: ../data/vinagre.ui.h:22
+ msgid "Connect"
+ msgstr "連線"

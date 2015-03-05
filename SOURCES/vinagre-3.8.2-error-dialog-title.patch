@@ -1,0 +1,28 @@
+From e15757679fadf405b67d66fcfb094c9fc970de8e Mon Sep 17 00:00:00 2001
+From: Marek Kasik <mkasik@redhat.com>
+Date: Wed, 3 Jul 2013 16:57:28 +0200
+Subject: [PATCH] Show correct title in error dialog
+
+Fix a check for null.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=703551
+---
+ vinagre/vinagre-utils.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vinagre/vinagre-utils.vala b/vinagre/vinagre-utils.vala
+index b37c31c..dd6163a 100644
+--- a/vinagre/vinagre-utils.vala
++++ b/vinagre/vinagre-utils.vala
+@@ -36,7 +36,7 @@ namespace Vinagre.Utils {
+     public void show_error_dialog (string? title,
+                                    string? message,
+                                    Window? parent) {
+-        if (title != null)
++        if (title == null)
+             title = _("An error occurred");
+ 
+         var dialog = new MessageDialog (parent,
+-- 
+2.1.0
+

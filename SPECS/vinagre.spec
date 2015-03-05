@@ -4,7 +4,7 @@
 
 Name:           vinagre
 Version:        3.8.2
-Release:        4%{?dist}
+Release:        12%{?dist}
 Summary:        VNC client for GNOME
 
 Group:          Applications/System
@@ -17,6 +17,17 @@ Source0:        http://download.gnome.org/sources/vinagre/3.8/%{name}-%{version}
 Patch0:         vinagre-3.8.2-switch-to-freerdp.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1055914
 Patch1:		vinagre-3.8.2-fix-storing-passwords.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1068615
+Patch2:		vinagre-3.8.2-show-help.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1141150
+Patch3:		vinagre-3.8.2-error-dialog-title.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=862389
+Patch4:		vinagre-3.8.2-rdp-size.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1091765
+Patch5:		vinagre-3.8.2-freerdp-api.patch
+Patch6:		vinagre-3.8.2-certificates.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1142870
+Patch7:		vinagre-3.8.2-translation.patch
 
 %if 0%{?with_spice}
 BuildRequires:  spice-gtk3-devel
@@ -35,15 +46,14 @@ BuildRequires:  vte3-devel >= 0.20
 BuildRequires:  vala-devel
 BuildRequires:  itstool
 BuildRequires:  libsecret-devel
+BuildRequires:  freerdp-devel
 
 # for /usr/share/dbus-1/services
 Requires: dbus
 
-# for /usr/bin/xfreerdp
-Requires: xfreerdp
-
 BuildRequires: automake autoconf libtool
 BuildRequires: gnome-common
+BuildRequires: yelp-tools
 
 # -devel package removed in 3.1.2-1
 # http://git.gnome.org/browse/vinagre/commit/?id=6bb9d9fda0434e26ec7a7a8a114a96b930348a7c
@@ -66,6 +76,14 @@ Apart from the VNC protocol, vinagre supports Spice and RDP.
 %setup -q
 %patch0 -p1 -b .freerdp
 %patch1 -p1 -b .passwords
+%patch2 -p1 -b .show-help
+%patch3 -p1 -b .error-dialog-title
+%patch4 -p1 -b .rdp-size
+%patch5 -p1 -b .freerdp-api
+%patch6 -p1 -b .certificates
+%patch7 -p1 -b .translation
+
+autoreconf -if
 
 %build
 CFLAGS="%optflags -UGTK_DISABLE_DEPRECATED" %configure --enable-avahi \
@@ -137,6 +155,41 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 
 %changelog
+* Mon Oct 20 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-12
+- Add translations of new strings
+- Resolves: #1142870
+
+* Wed Sep 17 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-11
+- Add build-dependency of yelp-tools
+- Related: #1091765
+
+* Wed Sep 17 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-10
+- Run autoreconf because of modified configure.ac
+- Related: #1091765
+
+* Wed Sep 17 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-9
+- Use FreeRDP API in RDP plugin
+- Request RDP certificate verification if needed
+- Add available translations for new strings
+- Resolves: #1091765
+
+* Wed Sep 17 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-8
+- Allow to customize desktop size for RDP protocol
+- Add available translations for new strings
+- Resolves: #862389
+
+* Tue Sep 16 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-7
+- Show correct title in error dialog
+- Resolves: #1141150
+
+* Wed Sep 10 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-6
+- Rebuild because of rpmdiff
+- Related: #1068615
+
+* Wed Sep 10 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-5
+- Don't close connect dialog when showing help
+- Resolves: #1068615
+
 * Tue Jan 28 2014 David King <dking@redhat.com> - 3.8.2-4
 - Fix storing passwords in libsecret (#1055914)
 

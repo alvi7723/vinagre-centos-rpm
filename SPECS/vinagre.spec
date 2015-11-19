@@ -3,57 +3,41 @@
 %endif
 
 Name:           vinagre
-Version:        3.8.2
-Release:        12%{?dist}
+Version:        3.14.3
+Release:        1%{?dist}
 Summary:        VNC client for GNOME
 
 Group:          Applications/System
 License:        GPLv2+
-URL:            http://projects.gnome.org/vinagre/
+URL:            https://wiki.gnome.org/Apps/Vinagre
 #VCS: git:git://git.gnome.org/vinagre
-Source0:        http://download.gnome.org/sources/vinagre/3.8/%{name}-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/%{name}/3.14/%{name}-%{version}.tar.xz
 
-# https://bugzilla.redhat.com/show_bug.cgi?id=978825
-Patch0:         vinagre-3.8.2-switch-to-freerdp.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=1055914
-Patch1:		vinagre-3.8.2-fix-storing-passwords.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=1068615
-Patch2:		vinagre-3.8.2-show-help.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=1141150
-Patch3:		vinagre-3.8.2-error-dialog-title.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=862389
-Patch4:		vinagre-3.8.2-rdp-size.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=1091765
-Patch5:		vinagre-3.8.2-freerdp-api.patch
-Patch6:		vinagre-3.8.2-certificates.patch
-# https://bugzilla.redhat.com/show_bug.cgi?id=1142870
-Patch7:		vinagre-3.8.2-translation.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1174568
+Patch0:         vinagre-3.14.3-translations.patch
+Patch1:         vinagre-3.14.3-translations-2.patch
 
 %if 0%{?with_spice}
-BuildRequires:  spice-gtk3-devel
+BuildRequires:  pkgconfig(spice-client-gtk-3.0)
 %endif
-BuildRequires:  gtk-vnc2-devel >= 0.4.3
-BuildRequires:  glib2-devel >= 2.25.11
-BuildRequires:  gtk3-devel >= 3.0.3
-BuildRequires:  avahi-ui-devel >= 0.6.26
-BuildRequires:  avahi-gobject-devel >= 0.6.26
-BuildRequires:  gettext intltool
+BuildRequires:  pkgconfig(avahi-gobject)
+BuildRequires:  pkgconfig(avahi-ui-gtk3)
+BuildRequires:  pkgconfig(freerdp)
+BuildRequires:  pkgconfig(gio-unix-2.0)
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(gtk-vnc-2.0)
+BuildRequires:  pkgconfig(libsecret-1)
+BuildRequires:  pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(telepathy-glib)
+BuildRequires:  pkgconfig(vte-2.91)
 BuildRequires:  desktop-file-utils
-BuildRequires:  libgnome-keyring-devel
-BuildRequires:  telepathy-glib-devel >= 0.11.6
-BuildRequires:  libxml2-devel >= 2.6.31
-BuildRequires:  vte3-devel >= 0.20
-BuildRequires:  vala-devel
+BuildRequires:  intltool
 BuildRequires:  itstool
-BuildRequires:  libsecret-devel
-BuildRequires:  freerdp-devel
+BuildRequires:  vala-devel
 
 # for /usr/share/dbus-1/services
 Requires: dbus
-
-BuildRequires: automake autoconf libtool
-BuildRequires: gnome-common
-BuildRequires: yelp-tools
+Requires: telepathy-filesystem
 
 # -devel package removed in 3.1.2-1
 # http://git.gnome.org/browse/vinagre/commit/?id=6bb9d9fda0434e26ec7a7a8a114a96b930348a7c
@@ -74,87 +58,78 @@ Apart from the VNC protocol, vinagre supports Spice and RDP.
 
 %prep
 %setup -q
-%patch0 -p1 -b .freerdp
-%patch1 -p1 -b .passwords
-%patch2 -p1 -b .show-help
-%patch3 -p1 -b .error-dialog-title
-%patch4 -p1 -b .rdp-size
-%patch5 -p1 -b .freerdp-api
-%patch6 -p1 -b .certificates
-%patch7 -p1 -b .translation
-
-autoreconf -if
+%patch0 -p1 -b .translations
+%patch1 -p1 -b .translations-2
 
 %build
-CFLAGS="%optflags -UGTK_DISABLE_DEPRECATED" %configure --enable-avahi \
-           --disable-static \
-           --disable-applet \
+%configure \
 %if 0%{?with_spice}
            --enable-spice \
 %endif
            --enable-rdp \
-           --enable-ssh
-make %{?_smp_mflags}
+           --enable-ssh \
+           --with-avahi
+make V=1 %{?_smp_mflags}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-
-# Remove text files installed by vinagre, we install them in a versioned
-# directory in the files section
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/vinagre/
-
-desktop-file-install                                            \
-        --remove-category=Application                           \
-        --add-category=GTK                                      \
-        --delete-original                                       \
-        --dir=$RPM_BUILD_ROOT%{_datadir}/applications           \
-        $RPM_BUILD_ROOT%{_datadir}/applications/vinagre.desktop
-
-# drop unwanted stuff
-rm -f $RPM_BUILD_ROOT%{_libdir}/vinagre-3.0/plugins/*.la
+make install DESTDIR=%{buildroot} INSTALL="install -p"
 
 %find_lang vinagre --with-gnome
 
+
+%check
+make check
+
+
 %post
 update-desktop-database &> /dev/null || :
-update-mime-database %{_datadir}/mime &> /dev/null || :
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+touch --no-create %{_datadir}/mime/packages &>/dev/null || :
+
 
 %postun
 update-desktop-database &> /dev/null || :
-update-mime-database %{_datadir}/mime &> /dev/null || :
 if [ $1 -eq 0 ]; then
   touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
   gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+  touch --no-create %{_datadir}/mime/packages &>/dev/null || :
+  update-mime-database -n %{_datadir}/mime &>/dev/null || :
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 fi
 
+
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+update-mime-database -n %{_datadir}/mime &>/dev/null || :
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
+
 %files -f vinagre.lang
+%doc AUTHORS COPYING NEWS README
 %{_bindir}/vinagre
+%{_datadir}/appdata/*.appdata.xml
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/*/*
 %{_datadir}/mime/packages/vinagre-mime.xml
 %{_datadir}/vinagre/
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
-%dir %{_datadir}/telepathy/
-%dir %{_datadir}/telepathy/clients/
 %{_datadir}/telepathy/clients/Vinagre.client
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
 %dir %{_datadir}/GConf/
 %dir %{_datadir}/GConf/gsettings/
 %{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
-
-
 %doc %{_mandir}/man1/vinagre.1.gz
-%doc README NEWS COPYING AUTHORS
 
 
 %changelog
+* Thu Apr 30 2015 Marek Kasik <mkasik@redhat.com> - 3.14.3-1
+- Update to 3.14.3
+- Add translations update from translation team
+- Add translation fix from upstream
+- Remove unused patches
+- Resolves: #1174568
+
 * Mon Oct 20 2014 Marek Kasik <mkasik@redhat.com> - 3.8.2-12
 - Add translations of new strings
 - Resolves: #1142870

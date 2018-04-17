@@ -4,7 +4,7 @@
 
 Name:           vinagre
 Version:        3.22.0
-Release:        9%{?dist}
+Release:        9.0.1%{?dist}
 Summary:        VNC client for GNOME
 
 Group:          Applications/System
@@ -12,13 +12,11 @@ License:        GPLv2+
 URL:            https://wiki.gnome.org/Apps/Vinagre
 #VCS: git:git://git.gnome.org/vinagre
 Source0:        https://download.gnome.org/sources/%{name}/3.22/%{name}-%{version}.tar.xz
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=1376044
-Patch0:         vinagre-3.14.3-RDP-update.patch
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=1384965
-Patch1:         vinagre-3.22.0-freerdp-versions.patch
-Patch2:         vinagre-3.22.0-rdp-connection-cancel.patch
+# Handle changed freerdp pkgconfig module name
+# https://bugzilla.gnome.org/show_bug.cgi?id=765444
+Patch0:         0001-handle-new-freerdp-pkgconfig-name.patch
+# CLRBUF_32BPP might be undefined with latest freerdp
+Patch1:         0002-freerdp2-32bpp.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1435715
 Patch3:         vinagre-3.22.0-fullscreen-toolbar.patch
@@ -31,7 +29,7 @@ BuildRequires:  pkgconfig(spice-client-gtk-3.0)
 %endif
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(avahi-ui-gtk3)
-BuildRequires:  pkgconfig(freerdp)
+BuildRequires:  pkgconfig(freerdp2)
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk-vnc-2.0)
@@ -66,14 +64,15 @@ Apart from the VNC protocol, vinagre supports Spice and RDP.
 
 %prep
 %setup -q
-%patch0 -p1 -b .RDP-update
-%patch1 -p1 -b .freerdp-versions
-%patch2 -p1 -b .rdp-connection-cancel
+%patch0 -p1 -b .rdp-pkgconfig
+%patch1 -p1 -b .rdp-3dbpp
 %patch3 -p1 -b .fullscreen-toolbar
 %patch4 -p1 -b .share-clipboard
 
 %build
-autoreconf -ivf
+# copied from autogen.sh, needed for Patch0; drop when that is merged
+ACLOCAL_FLAGS="$ACLOCAL_FLAGS" USE_GNOME2_MACROS=1 . gnome-autogen.sh
+export CFLAGS="%{optflags} -Wno-deprecated-declarations -Wno-format-nonliteral"
 %configure \
 %if 0%{?with_spice}
            --enable-spice \
@@ -136,6 +135,12 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 
 %changelog
+* Tue Apr 17 2018 Mike DePaulo (GFDL) - 3.22.0-9.0.1
+- Use freerdp2 instead of 1.0
+- Replace RHEL FreeRDP patches with Fedora's FreeRDP 2.0 patches
+- Use Fedora's configure logic, which the Fedora's patch needs:
+  0001-handle-new-freerdp-pkgconfig-name.patch
+
 * Mon Sep 25 2017 Marek Kasik <mkasik@redhat.com> - 3.22.0-9
 - Fix "Share clipboard" functionality in Spice plugin
 - Resolves: #1459111
